@@ -1,0 +1,12 @@
+[localhost]
+127.0.0.1 ansible_connection=local
+
+[dev]
+10.0.0.1 
+
+[prod]
+10.0.0.128 
+
+[all_bigip:children]
+dev
+prod

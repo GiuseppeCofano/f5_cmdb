@@ -1,0 +1,5 @@
+- name: Gather and push BIG-IP facts
+  hosts: localhost
+  gather_facts: False
+  roles:
+    - ansible_role_bigip_gather

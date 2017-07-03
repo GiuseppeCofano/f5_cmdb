@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: Add repository
+      yum_repository:
+        name: epel
+        description: EPEL YUM repo
+        baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+
+    - name: Add repository
+      yum_repository:
+        name: mongodb-repository
+        description: MongoDB YUM repo
+        baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/
+        gpgcheck: no
+        enabled: yes
+
+    - name: Install packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mongodb-org
+
+    - name: start the service
+      service:
+        name: mongod
+        state: started
+	enabled: started
